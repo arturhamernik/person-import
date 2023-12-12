@@ -6,7 +6,11 @@ import lombok.RequiredArgsConstructor;
 import miquido.recruitment.dto.PersonDto;
 import miquido.recruitment.service.PersonService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,13 +24,13 @@ public class PersonController {
 
     @Operation(operationId = "get", description = "Get person from database by id")
     @GetMapping("/{id}")
-    public ResponseEntity<PersonDto> getPerson(@PathVariable("id") String id) {
+    ResponseEntity<PersonDto> getPerson(@PathVariable("id") Long id) {
         return ResponseEntity.ok(personService.findPersonById(id));
     }
 
     @Operation(operationId = "search", description = "Search for person is database by name case inclusive")
     @GetMapping()
-    public ResponseEntity<List<PersonDto>> findPerson(@RequestParam("name") String name) {
+    ResponseEntity<List<PersonDto>> findPerson(@RequestParam("name") String name) {
         return ResponseEntity.ok(personService.findPersonByName(name));
     }
 }

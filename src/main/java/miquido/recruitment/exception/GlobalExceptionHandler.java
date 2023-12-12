@@ -16,7 +16,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleBadRequest(
             RuntimeException ex, WebRequest request) {
         return handleExceptionInternal(ex, ex.getMessage(),
-                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+                new HttpHeaders(), HttpStatus.UNPROCESSABLE_ENTITY, request);
     }
 
     @ExceptionHandler(value

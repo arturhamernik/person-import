@@ -1,11 +1,15 @@
 package miquido.recruitment.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.*;
 
 import java.math.BigDecimal;
 
+@Builder(toBuilder = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,36 +1,47 @@
 package miquido.recruitment.common;
 
+import lombok.extern.slf4j.Slf4j;
 import miquido.recruitment.dto.PersonDto;
 import miquido.recruitment.dto.PersonSwApiDto;
 import miquido.recruitment.entity.PersonEntity;
-import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
-@Mapper
-public interface PersonMapper {
+@Slf4j
+@Component
+public class PersonMapper {
 
-    PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
+    public PersonDto dtoFromEntity(PersonEntity entity) {
+        if (entity == null)
+            return null;
 
-    @Mapping(source = "id", target = "id",
-            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(source = "name", target = "name",
-            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(source = "height", target = "height",
-            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    @Mapping(source = "mass", target = "mass",
-            nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    PersonDto dtoFromEntity(PersonEntity entity);
+        return PersonDto.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .height(entity.getHeight())
+                .mass(entity.getMass())
+                .build();
+    }
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "height", target = "height", qualifiedByName = "mapDecimal")
-    @Mapping(source = "mass", target = "mass", qualifiedByName = "mapDecimal")
-    PersonEntity entityFromSwApi(PersonSwApiDto dto);
+    public PersonEntity entityFromSwApi(PersonSwApiDto dto) {
+        if (dto == null)
+            return null;
 
-    @Named("mapDecimal")
-    public static BigDecimal mapDecimal(String value) {
-        return !value.equals("unknown") ? new BigDecimal(value) : null;
+        return PersonEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .height(mapDecimal("height", dto.getHeight()))
+                .mass(mapDecimal("mass", dto.getMass()))
+                .build();
+    }
+
+    private BigDecimal mapDecimal(String field, String value) {
+        if(!value.equals("unknown"))
+            return new BigDecimal(value);
+        else {
+            log.warn("Value passed in property {} is unknown!", field);
+            return null;
+        }
     }
 }
