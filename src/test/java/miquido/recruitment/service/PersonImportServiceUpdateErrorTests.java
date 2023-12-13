@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(properties = {"person.exists.action=ERROR"})
 @ExtendWith(SpringExtension.class)
-public class PersonImportServiceErrorTests {
+public class PersonImportServiceUpdateErrorTests {
 
     @Mock
     PersonRepository personRepository;
