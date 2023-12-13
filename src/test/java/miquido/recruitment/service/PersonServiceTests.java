@@ -47,21 +47,7 @@ public class PersonServiceTests {
                 .mass(new BigDecimal("70"))
                 .build();
 
-        PERSON_DTO_1 = PersonDto.builder()
-                .id(1L)
-                .name("Anakin Skywalker")
-                .height(new BigDecimal("177"))
-                .mass(new BigDecimal("70"))
-                .build();
-
         PERSON_ENTITY_2 = PersonEntity.builder()
-                .id(2L)
-                .name("Luke Skywalker")
-                .height(new BigDecimal("170"))
-                .mass(new BigDecimal("63"))
-                .build();
-
-        PERSON_DTO_2 = PersonDto.builder()
                 .id(2L)
                 .name("Luke Skywalker")
                 .height(new BigDecimal("170"))
@@ -75,7 +61,21 @@ public class PersonServiceTests {
                 .mass(new BigDecimal("59"))
                 .build();
 
+        PERSON_DTO_1 = PersonDto.builder()
+                .id(1L)
+                .name("Anakin Skywalker")
+                .height(new BigDecimal("177"))
+                .mass(new BigDecimal("70"))
+                .build();
+
         PERSON_DTO_2 = PersonDto.builder()
+                .id(2L)
+                .name("Luke Skywalker")
+                .height(new BigDecimal("170"))
+                .mass(new BigDecimal("63"))
+                .build();
+
+        PERSON_DTO_3 = PersonDto.builder()
                 .id(3L)
                 .name("Leia")
                 .height(new BigDecimal("165"))
@@ -114,6 +114,7 @@ public class PersonServiceTests {
 
         assertNotNull(peopleFound);
         assertEquals(1, peopleFound.size());
+        assertEquals(PERSON_DTO_3.getId(), peopleFound.getFirst().getId());
     }
 
     @Test
@@ -127,6 +128,7 @@ public class PersonServiceTests {
 
         assertNotNull(peopleFound);
         assertEquals(2, peopleFound.size());
+        assertEquals(PERSON_DTO_2.getId(), peopleFound.getLast().getId());
     }
 
     @Test
