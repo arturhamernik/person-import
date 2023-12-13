@@ -20,6 +20,7 @@
         <org.projectlombok.version>1.18.30</org.projectlombok.version>
         <org.springdoc.version>2.2.0</org.springdoc.version>
         <org.springframework.security.version>5.5.1</org.springframework.security.version>
+        <junit.version>4.13.2</junit.version>
     </properties>
 
     <dependencies>
@@ -50,6 +51,12 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${org.springdoc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
