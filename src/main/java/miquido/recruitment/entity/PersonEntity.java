@@ -1,5 +1,6 @@
 package miquido.recruitment.entity;
 
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "person")
 @Entity
 public class PersonEntity {
 
